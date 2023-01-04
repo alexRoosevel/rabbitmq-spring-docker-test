@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  app:
+    image: 'spring'
+    container_name: 'spring-container'
+    build: ./
+    ports:
+      - "9000:9000"
+    depends_on:
+      - rabbitmq
+    environment:
+      - SPRING_RABBITMQ_HOST=rabbitmq
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
